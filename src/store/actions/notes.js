@@ -25,8 +25,6 @@ export const createNoteStart = () => {
 export const createNote = ( noteData, token ) => {
     return dispatch => {
         dispatch( createNoteStart() );
-        console.log(noteData);
-        console.log(token);
         axios.post( '/notes.json?auth=' + token, noteData )
             .then( response => {
                 console.log( response.data );
@@ -39,9 +37,9 @@ export const createNote = ( noteData, token ) => {
     };
 };
 
-export const createNoteInit = () => {
+export const createNoteEnd = () => {
     return {
-        type: actionTypes.CREATE_NOTE_INIT
+        type: actionTypes.CREATE_NOTE_END
     };
 };
 
@@ -118,12 +116,12 @@ export const editNoteStart = () => {
     };
 };
 
-export const editNote = ( noteData, token ) => {
+export const editNote = ( noteId, noteData, token ) => {
     return dispatch => {
         dispatch( editNoteStart() );
         // console.log(noteData);
         // console.log(token);
-        axios.post( '/notes.json?auth=' + token, noteData )
+        axios.put( '/notes/' + noteId + '.json?auth=' + token, noteData )
             .then( response => {
                 //console.log( response.data );
                 dispatch( editNoteSuccess( response.data.name, noteData ) );
@@ -135,9 +133,12 @@ export const editNote = ( noteData, token ) => {
     };
 };
 
-export const editNoteInit = () => {
+export const editNoteEnd = () => {
     return {
-        type: actionTypes.EDIT_NOTE_INIT
+        type: actionTypes.EDIT_NOTE_END
     };
 };
 
+// axios.delete(`${url}/${firebasePostId}.json`).then(response => {
+//     console.log(response)
+// })

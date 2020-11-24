@@ -1,9 +1,9 @@
 export {
     createNote,
-    createNoteInit,
+    createNoteEnd,
     fetchNotes,
     editNote,
-    editNoteInit,
+    editNoteEnd,
     selectNote
 } from './notes';
 export {
