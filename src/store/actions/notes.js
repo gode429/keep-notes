@@ -1,6 +1,26 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-notes';
 
+export const createNote = ( noteData, token ) => {
+    return dispatch => {
+        dispatch( createNoteStart() );
+        axios.post( '/notes.json?auth=' + token, noteData )
+            .then( response => {
+                dispatch( createNoteSuccess( response.data.name, noteData ) );
+            } )
+            .catch( error => {
+                console.log(error);
+                dispatch( createNoteFail( error ) );
+            } );
+    };
+};
+
+export const createNoteStart = () => {
+    return {
+        type: actionTypes.CREATE_NOTE_START
+    };
+};
+
 export const createNoteSuccess = ( id, noteData ) => {
     return {
         type: actionTypes.CREATE_NOTE_SUCCESS,
@@ -16,30 +36,37 @@ export const createNoteFail = ( error ) => {
     };
 }
 
-export const createNoteStart = () => {
+export const createNoteEnd = () => {
     return {
-        type: actionTypes.CREATE_NOTE_START
+        type: actionTypes.CREATE_NOTE_END
     };
 };
 
-export const createNote = ( noteData, token ) => {
+
+export const fetchNotes = (token, userId) => {
     return dispatch => {
-        dispatch( createNoteStart() );
-        axios.post( '/notes.json?auth=' + token, noteData )
-            .then( response => {
-                console.log( response.data );
-                dispatch( createNoteSuccess( response.data.name, noteData ) );
+        dispatch(fetchNotesStart());
+        const queryParams = '?auth=' + token + '&orderBy="userId"&equalTo="' + userId + '"';
+        axios.get( '/notes.json' + queryParams)
+            .then( res => {
+                const fetchedNotes = [];
+                for ( let key in res.data ) {
+                    fetchedNotes.push( {
+                        ...res.data[key],
+                        id: key
+                    } );
+                }
+                dispatch(fetchNotesSuccess(fetchedNotes));
             } )
-            .catch( error => {
-                console.log(error);
-                dispatch( createNoteFail( error ) );
+            .catch( err => {
+                dispatch(fetchNotesFail(err));
             } );
     };
 };
 
-export const createNoteEnd = () => {
+export const fetchNotesStart = () => {
     return {
-        type: actionTypes.CREATE_NOTE_END
+        type: actionTypes.FETCH_NOTES_START
     };
 };
 
@@ -57,33 +84,6 @@ export const fetchNotesFail = ( error ) => {
     };
 };
 
-export const fetchNotesStart = () => {
-    return {
-        type: actionTypes.FETCH_NOTES_START
-    };
-};
-
-export const fetchNotes = (token, userId) => {
-    return dispatch => {
-        dispatch(fetchNotesStart());
-        const queryParams = '?auth=' + token + '&orderBy="userId"&equalTo="' + userId + '"';
-        axios.get( '/notes.json' + queryParams)
-            .then( res => {
-                const fetchedNotes = [];
-                for ( let key in res.data ) {
-                    fetchedNotes.push( {
-                        ...res.data[key],
-                        id: key
-                    } );
-                }
-                //console.log(fetchedNotes);
-                dispatch(fetchNotesSuccess(fetchedNotes));
-            } )
-            .catch( err => {
-                dispatch(fetchNotesFail(err));
-            } );
-    };
-};
 
 
 
@@ -95,26 +95,7 @@ export const  selectNote = (token, userId, note) => {
 };
 
 
-export const editNoteSuccess = ( id, noteData ) => {
-    return {
-        type: actionTypes.EDIT_NOTE_SUCCESS,
-        noteId: id,
-        noteData: noteData
-    };
-};
 
-export const editNoteFail = ( error ) => {
-    return {
-        type: actionTypes.EDIT_NOTE_FAIL,
-        error: error
-    };
-}
-
-export const editNoteStart = () => {
-    return {
-        type: actionTypes.EDIT_NOTE_START
-    };
-};
 
 export const editNote = ( noteId, noteData, token ) => {
     return dispatch => {
@@ -133,12 +114,70 @@ export const editNote = ( noteId, noteData, token ) => {
     };
 };
 
+export const editNoteStart = () => {
+    return {
+        type: actionTypes.EDIT_NOTE_START
+    };
+};
+
+export const editNoteSuccess = ( id, noteData ) => {
+    return {
+        type: actionTypes.EDIT_NOTE_SUCCESS,
+        noteId: id,
+        noteData: noteData
+    };
+};
+
+export const editNoteFail = ( error ) => {
+    return {
+        type: actionTypes.EDIT_NOTE_FAIL,
+        error: error
+    };
+}
+
 export const editNoteEnd = () => {
     return {
         type: actionTypes.EDIT_NOTE_END
     };
 };
 
-// axios.delete(`${url}/${firebasePostId}.json`).then(response => {
-//     console.log(response)
-// })
+
+
+
+export const deleteNote = (noteId, token) => {
+    return dispatch => {
+        dispatch( deleteNoteStart() );
+        axios.delete( '/notes/' + noteId + '.json?auth=' + token )
+            .then( response => {
+                dispatch( deleteNoteSuccess() );
+            } )
+            .catch( error => {
+                dispatch( deleteNoteFail( error ) );
+            } );
+    };
+};
+
+export const deleteNoteStart = () => {
+    return {
+        type: actionTypes.DELETE_NOTE_START
+    };
+};
+
+export const deleteNoteSuccess = ( ) => {
+    return {
+        type: actionTypes.DELETE_NOTE_SUCCESS,
+    };
+};
+
+export const deleteNoteFail = ( error ) => {
+    return {
+        type: actionTypes.DELETE_NOTE_FAIL,
+        error: error
+    };
+}
+
+export const deleteNoteEnd = () => {
+    return {
+        type: actionTypes.DELETE_NOTE_END
+    };
+};

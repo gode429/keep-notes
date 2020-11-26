@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import SaveIcon from '@material-ui/icons/Save';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import axios from '../../axios-notes';
-import Card from '../../components/UI/Card/Card';
+import Card from '../../components/UI/Card/ErrorModal';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 import * as actions from '../../store/actions/index';
 import classes from './CreateNote.module.css';
@@ -41,7 +41,6 @@ class CreateNote extends Component {
     }
 
     onCreateSuccessHandler = () => {
-        console.log('hahahahahaha');
         this.props.onCreateNoteEnd();
         this.props.history.push('/fetchNotes');
     }
@@ -81,10 +80,8 @@ class CreateNote extends Component {
         }
         if(this.props.created){
             form = (
-                <Card>
-                    <h3>Your Note was Saved Successfully</h3>
-                    <button onClick={this.onCreateSuccessHandler}>OK</button>
-                        
+                <Card onClose={this.onCreateSuccessHandler}>
+                    Your Note was Saved Successfully
                 </Card>
             )
         }

@@ -17,6 +17,11 @@ export const EDIT_NOTE_SUCCESS = 'EDIT_NOTE_SUCCESS';
 export const EDIT_NOTE_FAIL = 'EDIT_NOTE_FAIL';
 export const EDIT_NOTE_END = 'EDIT_NOTE_END';
 
+export const DELETE_NOTE_START = 'DELETE_NOTE_START';
+export const DELETE_NOTE_SUCCESS = 'DELETE_NOTE_SUCCESS';
+export const DELETE_NOTE_FAIL = 'DELETE_NOTE_FAIL';
+export const DELETE_NOTE_END = 'DELETE_NOTE_END';
+
 export const AUTH_START = 'AUTH_START';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_FAIL = 'AUTH_FAIL';

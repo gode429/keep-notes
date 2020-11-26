@@ -14,6 +14,7 @@ const note = ( props ) => {
                  {props.noteTitle}
             </h4>
             <p>{props.noteContent.slice(0,100)}</p>
+            {/* <p>{props.noteContent}</p> */}
         </div>
     );
 };

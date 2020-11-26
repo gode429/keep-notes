@@ -1,14 +1,16 @@
 .Note {
     width: 50%;
+    background-color:  rgba(27, 29, 25, 0.945) !important;
+    color: white;
     border: 1px solid #eee;
     box-shadow: 0 2px 3px #ccc;
     padding: 12px;
     margin: 10px auto;
     box-sizing: border-box;
     border-radius: 5px;
+    text-align: center;
 } 
 
 h4 {
-    text-align: center;
     text-decoration: underline;
 }

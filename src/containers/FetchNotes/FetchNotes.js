@@ -17,22 +17,24 @@ class FetchNotes extends Component {
         this.props.onFetchNotes(this.props.token, this.props.userId);
     }
     onNoteEditHandler = (note) => {
-        console.log('FetchNotes.js ===  ', note.id, note.noteTitle);
         this.props.onSelectNote(this.props.token, this.props.userId, note);
         this.props.history.push('/editNote');
 }
     render () {
-        let notesList = <Spinner />;
+        let notesList = (<div className={classes.spinnerDiv}>
+                            <Spinner />
+                        </div>
+                    );
         let notes = null;
         if ( !this.props.loading ) {
             if(this.state.filterText === ''){
                 notes = this.props.notes;
             } else {
                 notes = this.props.notes.filter(note => {
-                    return  note.noteTitle.toUpperCase().includes(this.state.filterText.toUpperCase()) ? note : console.log(note.id);
+                    return  note.noteTitle.toUpperCase().includes(this.state.filterText.toUpperCase()) ? note : null;
                 })
             }
-            notesList = notes.map( note => (
+            const notegroup = notes.map( note => (
                 <Note
                     key={note.id}
                     noteId={note.id}
@@ -40,26 +42,29 @@ class FetchNotes extends Component {
                     noteContent={note.noteContent}
                     clicked={this.onNoteEditHandler}
                 />
-            ) )
+            ) );
+            notesList = (
+                <div>
+                    <div className={classes.textfield}>
+                        <TextField
+                                id="standard-helperText"
+                                label="Search By Note Title"
+                                className={classes.TextField}
+                                value={this.state.filterText}
+                                onChange={event => this.setState({filterText: event.target.value})} 
+                        />
+                    </div>
+                    <div className={classes.flexContainer}>
+                        {notegroup}
+                    </div>
+                </div>
+            );
         }
 
         return (
             <div>
-                <div className={classes.textfield}>
-                    <TextField
-                            id="standard-helperText"
-                            label="Search By Note Title"
-                            className={classes.TextField}
-                            value={this.state.filterText}
-                            onChange={event => this.setState({filterText: event.target.value})} 
-                    />
-                </div>
-                <div className={classes.flexContainer}>
-                    {notesList}
-                </div>
-
-            </div>
-            
+                {notesList}
+            </div>   
         );
     }
 }

@@ -1,5 +1,4 @@
 .flexContainer {
-    margin-top: 100px;
     display: flex;
     flex-wrap: wrap;
     margin-left: 50px;
@@ -13,8 +12,13 @@
   }
 
   .textfield {
-    margin-top: 100px;
+    margin-top: 70px;
     margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .spinnerDiv {
+    margin-top: 300px;
     text-align: center;
   }
 

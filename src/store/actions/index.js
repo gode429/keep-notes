@@ -4,6 +4,8 @@ export {
     fetchNotes,
     editNote,
     editNoteEnd,
+    deleteNote,
+    deleteNoteEnd,
     selectNote
 } from './notes';
 export {
