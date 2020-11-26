@@ -7,6 +7,7 @@ import Card from '../../components/UI/Card/Card';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import SaveIcon from '@material-ui/icons/Save';
+import DeleteIcon from '@material-ui/icons/Delete';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import axios from '../../axios-notes';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
@@ -72,11 +73,11 @@ class EditNote extends Component {
                         onChange={this.handleNoteContent} 
                         rows="15" cols="50" 
                     />
-                    <br />
+                    <br /><br />
                     <Button variant="contained" color="primary" size="large" startIcon={<SaveIcon />} type="submit">
                         Save 
                     </Button>
-                    <Button variant="contained" color="primary" size="large"  onClick={this.deleteHandler}>
+                    <Button variant="contained" color="primary" size="large" startIcon={<DeleteIcon />}  onClick={this.deleteHandler}>
                         Delete 
                     </Button>
                     
@@ -103,7 +104,6 @@ class EditNote extends Component {
             <div className={classes.editNote}>
                 <h3>Edit your Note </h3>
                 {form}
-                
             </div>
         );
     }

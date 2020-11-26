@@ -3,7 +3,7 @@ import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 //import FetchNotes from './containers/FetchNotes/FetchNotes';
-import EditNote from './containers/EditNote/EditNote';
+//import EditNote from './containers/EditNote/EditNote';
 import CreateNote from './containers/CreateNote/CreateNote';
 import asyncComponent from './hoc/asyncComponent/asyncComponent';
 import Layout from './hoc/Layout/Layout';
@@ -14,6 +14,10 @@ import * as actions from './store/actions/index';
 
 const asyncFetchNotes = asyncComponent(() => {
   return import('./containers/FetchNotes/FetchNotes');
+});
+
+const asyncEditNote = asyncComponent(() => {
+  return import('./containers/EditNote/EditNote');
 });
 
 const asyncAuth = asyncComponent(() => {
@@ -40,11 +44,11 @@ class App extends Component {
       routes = (
         <Switch>
           {/* <Route path="/checkout" component={asyncCheckout} /> */}
-          <Route path="/fetchNotes" component={asyncFetchNotes} />
-          <Route path="/editNote" component={EditNote} />
           <Route path="/logout" component={Logout} />
           <Route path="/auth" component={asyncAuth} />
           <Route path="/createnote" exact component={CreateNote} />
+          <Route path="/fetchNotes" component={asyncFetchNotes} />
+          <Route path="/editNote" component={asyncEditNote} />
           <Route path="/" exact component={CreateNote} />
           <Redirect to="/" />
         </Switch>

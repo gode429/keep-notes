@@ -1,4 +1,4 @@
-.error-modal {
+.error_modal {
   position: fixed;
   top: 30vh;
   left: calc(50% - 15rem);
@@ -9,7 +9,7 @@
   border-radius: 7px;
 }
 
-.error-modal h2 {
+.error_modal h2 {
   margin: 0;
   padding: 1rem;
   background: #ff2058;
@@ -17,11 +17,11 @@
   border-radius: 7px 7px 0 0;
 }
 
-.error-modal p {
+.error_modal p {
     padding: 1rem;
 }
 
-.error-modal__actions {
+.error_modal__actions {
     display: flex;
     justify-content: flex-end;
     padding: 0 0.5rem;
@@ -37,7 +37,7 @@
   z-index: 50;
 }
 
-button {
+.cardButton {
   font: inherit;
   background: #ff2058;
   padding: 0.5rem 2rem;
@@ -48,11 +48,11 @@ button {
   cursor: pointer;
 }
 
-button:hover,
-button:active {
+.cardButton:hover,
+.cardButton:active {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.26);
 }
 
-button:focus {
+.cardButton:focus {
   outline: none;
 }

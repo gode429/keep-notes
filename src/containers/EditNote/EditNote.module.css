@@ -30,6 +30,7 @@ TextField {
 }
 Button {
     margin-left: 50px !important;
+    margin-bottom: 10px !important;
     margin-right: 50px !important;
 
 }

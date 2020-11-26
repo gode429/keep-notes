@@ -1,16 +1,16 @@
 import React from 'react';
 
-import './ErrorModal.css';
+import classes from  './Card.module.css';
 
 const ErrorModal = React.memo(props => {
   return (
     <React.Fragment>
-      <div className="backdrop" />
-      <div className="error-modal">
+      <div className={classes.backdrop} />
+      <div className={classes.error_modal}>
         <h2>Alert!</h2>
         <p>{props.children}</p>
-        <div className="error-modal__actions">
-          <button type="button" onClick={props.onClose}>
+        <div className={classes.error_modal__actions}>
+          <button className={classes.cardButton} type="button" onClick={props.onClose}>
             Okay
           </button>
         </div>
