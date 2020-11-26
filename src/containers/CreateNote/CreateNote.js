@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import SaveIcon from '@material-ui/icons/Save';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import axios from '../../axios-notes';
-import Card from '../../components/UI/Card/ErrorModal';
+import Card from '../../components/UI/Card/Card';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 import * as actions from '../../store/actions/index';
 import classes from './CreateNote.module.css';

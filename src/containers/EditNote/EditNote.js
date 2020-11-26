@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import classes from './EditNote.module.css';
 import { connect } from 'react-redux';
-import Card from '../../components/UI/Card/ErrorModal';
+import Card from '../../components/UI/Card/Card';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
